@@ -1,3 +1,7 @@
+CREATE DB Pharmacie;
+
+
+
 DROP TABLE IF EXISTS Personnel cascade;
 DROP TABLE IF EXISTS Users cascade;
 DROP TABLE IF EXISTS Client cascade;
@@ -17,7 +21,6 @@ DROP TABLE IF EXISTS Ordonnance cascade;
 DROP TABLE IF EXISTS Alerte cascade;
 DROP TABLE IF EXISTS Depense cascade;
 DROP TABLE IF EXISTS Commande_client cascade;
-
 
 -- Personnel Table
 CREATE TABLE Personnel (
@@ -196,6 +199,16 @@ CREATE TABLE Commande_client (
   FOREIGN KEY (Id_prod) REFERENCES Produit(Id_prod)
 );
 
+CREATE TABLE NonConformites (
+  Id_nonconformite SERIAL PRIMARY KEY,
+  Id_medicament1 INT NOT NULL,
+  Id_medicament2 INT NOT NULL,
+  CONSTRAINT fk_medicament1 FOREIGN KEY (Id_medicament1) REFERENCES Produit(Id_prod),
+  CONSTRAINT fk_medicament2 FOREIGN KEY (Id_medicament2) REFERENCES Produit(Id_prod),
+  UNIQUE(Id_medicament1, Id_medicament2)
+);
+
+
 -- Indexes for performance
 CREATE INDEX idx_client_name ON Client(Nom);
 CREATE INDEX idx_vente_date ON Vente(Date);
@@ -232,45 +245,23 @@ Insert into Fournisseur (Id_fournsr ,Nom,Adresse,Tel) values
 Insert into Categorie (Id_categ , nom) values 
 (1, 'Dermatologie'),
 (2, 'Digestion et nausées'),
-(3, 'Douleurs et fièvres');
-(4, 'Vitamines et minéraux');
-(5, 'Minceur et forme');
-(6, 'Allergies');
-(7, 'Santé et bien-être');
-(8, 'Maman et bébé');
-(9, 'Homéopathie');
-(10, 'Médecines naturelles');
-(11, 'Sexualité');
-(12, 'Orthopédie');
-(13, 'Matériel médical');
-(14, 'Hygiène');
-(15, 'Beauté');
-(16, 'Solaire');
-(17, 'Vétérinaire');
+(3, 'Douleurs et fièvres'),
+(4, 'Vitamines et minéraux'),
+(5, 'Minceur et forme'),
+(6, 'Allergies'),
+(7, 'Santé et bien-être'),
+(8, 'Maman et bébé'),
+(9, 'Homéopathie'),
+(10, 'Médecines naturelles'),
+(11, 'Sexualité'),
+(12, 'Orthopédie'),
+(13, 'Matériel médical'),
+(14, 'Hygiène'),
+(15, 'Beauté'),
+(16, 'Solaire'),
+(17, 'Vétérinaire'),
 (18, 'Autres');
 -- Populating the Client table with sample data
-INSERT INTO Produit (Id_prod, Id_fournsr, Id_categ, Nom, Prix_vente, Prix_achat, Date_expr) VALUES 
-(1, 1, 3, 'Doliprane', 10.99, 6.99, '2025-12-10'),
-(2, 1, 1, 'Aclav', 12.99, 8.99, '2025-09-01'),
-(3, 1, 6, 'Zyrtec', 10.99, 6.99, '2025-12-10');
-(4, 1, 2, 'Oedes', 12.99, 8.99, '2025-09-01');
-(5, 1, 4, 'Vitamine C', 10.99, 6.99, '2025-12-10');
-(6, 1, 5, 'XLS Medical', 12.99, 8.99, '2025-09-01');
-(7, 1, 7, 'Arkogélules', 10.99, 6.99, '2025-12-10');
-(8, 1, 8, 'Dodie', 12.99, 8.99, '2025-09-01');
-(9, 1, 9, 'Boiron', 10.99, 6.99, '2025-12-10');
-(10, 1, 10, 'Arkopharma', 12.99, 8.99, '2025-09-01');
-(11, 1, 11, 'Durex', 10.99, 6.99, '2025-12-10');
-(12, 1, 12, 'Thuasne', 12.99, 8.99, '2025-09-01');
-(13, 1, 13, 'Littmann', 10.99, 6.99, '2025-12-10');
-(14, 1, 14, 'Saforelle', 12.99, 8.99, '2025-09-01');
-(15, 1, 15, 'Nuxe', 10.99, 6.99, '2025-12-10');
-(16, 1, 16, 'Bioderma', 12.99, 8.99, '2025-09-01');
-(17, 1, 17, 'Frontline', 10.99, 6.99, '2025-12-10');
-(18, 1, 18, 'Autres', 12.99, 8.99, '2025-09-01');
-
-
-
 
 
 INSERT INTO Vente (  Id_vente, Id_prod ,Date, Quantite, Total, Id_client ) VALUES 
@@ -318,9 +309,27 @@ INSERT INTO Vente (  Id_vente, Id_prod ,Date, Quantite, Total, Id_client ) VALUE
 
 
 
+-- List of all products with less than 10 units remaining in stock
+SELECT p.Id_prod, p.Nom, (s.QuantiteEntree - s.QuantiteSortie) AS QuantiteRestante
+FROM Produit p
+JOIN Stock s ON p.Id_prod = s.Id_prod
+WHERE (s.QuantiteEntree - s.QuantiteSortie) < 10;
 
 
+-- Total sales and quantity sold for each product in January 2024
+SELECT p.Nom, SUM(v.Quantite) AS TotalQuantite, SUM(v.Total) AS TotalVentes
+FROM Vente v
+JOIN Produit p ON v.Id_prod = p.Id_prod
+WHERE v.Date BETWEEN '2024-01-01' AND '2024-01-31'
+GROUP BY p.Nom
+ORDER BY TotalVentes DESC;
 
+SELECT p.Nom, o.Date
+FROM Ordonnance o
+JOIN Produit p ON o.Id_prod = p.Id_prod
+WHERE o.Id_client = 1;
+
+SELECT * FROM verifier_conformite_medicaments(1);
 
 
 CREATE OR REPLACE FUNCTION verifier_conformite_medicaments(id_client INT)
