@@ -250,43 +250,138 @@ Insert into Categorie (Id_categ , nom) values
 (18, 'Autres');
 -- Populating the Client table with sample data
 INSERT INTO Produit (Id_prod, Id_fournsr, Id_categ, Nom, Prix_vente, Prix_achat, Date_expr) VALUES 
-(1, 1, 1, 'prod1', 10.99, 6.99, '2025-12-10'),
-(2, 1, 1, 'prod2', 12.99, 8.99, '2025-09-01'),
-(3, 1, 2, 'prod1', 10.99, 6.99, '2025-12-10');
+(1, 1, 3, 'Doliprane', 10.99, 6.99, '2025-12-10'),
+(2, 1, 1, 'Aclav', 12.99, 8.99, '2025-09-01'),
+(3, 1, 6, 'Zyrtec', 10.99, 6.99, '2025-12-10');
+(4, 1, 2, 'Oedes', 12.99, 8.99, '2025-09-01');
+(5, 1, 4, 'Vitamine C', 10.99, 6.99, '2025-12-10');
+(6, 1, 5, 'XLS Medical', 12.99, 8.99, '2025-09-01');
+(7, 1, 7, 'Arkogélules', 10.99, 6.99, '2025-12-10');
+(8, 1, 8, 'Dodie', 12.99, 8.99, '2025-09-01');
+(9, 1, 9, 'Boiron', 10.99, 6.99, '2025-12-10');
+(10, 1, 10, 'Arkopharma', 12.99, 8.99, '2025-09-01');
+(11, 1, 11, 'Durex', 10.99, 6.99, '2025-12-10');
+(12, 1, 12, 'Thuasne', 12.99, 8.99, '2025-09-01');
+(13, 1, 13, 'Littmann', 10.99, 6.99, '2025-12-10');
+(14, 1, 14, 'Saforelle', 12.99, 8.99, '2025-09-01');
+(15, 1, 15, 'Nuxe', 10.99, 6.99, '2025-12-10');
+(16, 1, 16, 'Bioderma', 12.99, 8.99, '2025-09-01');
+(17, 1, 17, 'Frontline', 10.99, 6.99, '2025-12-10');
+(18, 1, 18, 'Autres', 12.99, 8.99, '2025-09-01');
+
+
+
+
 
 INSERT INTO Vente (  Id_vente, Id_prod ,Date, Quantite, Total, Id_client ) VALUES 
 (1, 1, '2024-03-10', 6, 10.99*6, 1),
 (2, 2, '2024-03-10', 2, 12.99*2, 2),
-(3, 1, '2024-03-10', 1, 10.99 , 3);
+(3, 1, '2024-03-10', 1, 10.99 , 3),
+(4, 3, '2024-03-10', 3, .99*3, 1),
+(5, 2, '2024-03-10', 1, 12.99, 2),
+(6, 1, '2024-03-10', 2, 10.99*2, 3),
+(7, 3, '2024-03-10', 1, 10.99, 1),
+(8, 2, '2024-03-10', 3, 12.99*3, 2),
+(9, 1, '2024-03-10', 1, 10.99, 3),
+(10, 3, '2024-03-10', 2, 10.99*2, 1),
+(11, 2, '2024-03-10', 1, 12.99, 2),
+(12, 1, '2024-03-10', 3, 10.99*3, 3),
+(13, 3, '2024-03-10', 1, 10.99, 1),
+(14, 2, '2024-03-10', 2, 12.99*2, 2),
+(15, 1, '2024-03-10', 1, 10.99, 3),
+(16, 3, '2024-03-10', 3, 10.99*3, 1),
+(17, 2, '2024-03-10', 2, 12.99*2, 2),
+(18, 1, '2024-03-10', 1, 10.99, 3),
+(19, 3, '2024-03-10', 2, 10.99*2, 1),
+(20, 2, '2024-03-10', 3, 12.99*3, 2),
+(21, 1, '2024-03-10', 1, 10.99, 3),
+(22, 3, '2024-03-10', 2, 10.99*2, 1),
+(23, 2, '2024-03-10', 3, 12.99*3, 2),
+(24, 1, '2024-03-10', 1, 10.99, 3),
+(25, 3, '2024-03-10', 3, 10.99*3, 1),
+(26, 2, '2024-03-10', 2, 12.99*2, 2),
+(27, 1, '2024-03-10', 1, 10.99, 3),
+(28, 3, '2024-03-10', 2, 10.99*2, 1),
+(29, 2, '2024-03-10', 3, 12.99*3, 2),
+(30, 1, '2024-03-10', 1, 10.99, 3),
+(31, 3, '2024-03-10', 3, 10.99*3, 1),
+(32, 2, '2024-03-10', 2, 12.99*2, 2),
+(33, 1, '2024-03-10', 1, 10.99, 3),
+(34, 3, '2024-03-10', 2, 10.99*2, 1),
+(35, 2, '2024-03-10', 3, 12.99*3, 2),
+(36, 1, '2024-03-10', 1, 10.99, 3),
+(37, 3, '2024-03-10', 3, 10.99*3, 1),
+(38, 2, '2024-03-10', 2, 12.99*2, 2),
+(39, 1, '2024-03-10', 1, 10.99, 3),
+(40, 3, '2024-03-10', 2, 10.99*2, 1),
+(41, 2, '2024-03-10', 3, 12.99*3, 2);
 
-CREATE OR REPLACE FUNCTION update_stock_after_sale()
-RETURNS TRIGGER AS $$
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION verifier_conformite_medicaments(id_client INT)
+RETURNS VARCHAR AS $$
+DECLARE
+  message VARCHAR := '';
+  medicament_record RECORD;
 BEGIN
-  UPDATE Stock
-  SET QuantiteSortie = QuantiteSortie + NEW.Quantite
-  WHERE Id_prod = NEW.Id_prod;
-  RETURN NEW;
+  FOR medicament_record IN
+    SELECT p1.Id_prod, p2.Id_prod
+    FROM Produit p1
+    JOIN Vente v1 ON p1.Id_prod = v1.Id_prod AND v1.Id_client = id_client
+    JOIN Produit p2
+    JOIN Vente v2 ON p2.Id_prod = v2.Id_prod AND v2.Id_client = id_client
+    WHERE p1.Id_prod < p2.Id_prod AND EXISTS (
+      SELECT 1 FROM NonConformites
+      WHERE (Id_medicament1 = p1.Id_prod AND Id_medicament2 = p2.Id_prod)
+         OR (Id_medicament1 = p2.Id_prod AND Id_medicament2 = p1.Id_prod)
+    )
+  LOOP
+    message := message || 'Attention: Les médicaments ' || medicament_record.Id_prod || ' et ' || medicament_record.Id_prod || ' ne doivent pas être pris ensemble.';
+  END LOOP;
+
+  IF message = '' THEN
+    message := 'Aucune non-conformité détectée.';
+  END IF;
+
+  RETURN message;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER vente_after_insert
-AFTER INSERT ON Vente
-FOR EACH ROW
-EXECUTE FUNCTION update_stock_after_sale();
-
-CREATE OR REPLACE FUNCTION update_stock_after_return()
-RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION verifier_stock()
+RETURNS TABLE(Id_prod INT, Nom VARCHAR, QuantiteRestante INT) AS $$
 BEGIN
-  UPDATE Stock
-  SET QuantiteEntree = QuantiteEntree + NEW.Quantite
-  WHERE Id_prod = NEW.Id_prod;
-  RETURN NEW;
+  RETURN QUERY
+  SELECT p.Id_prod, p.Nom, (s.QuantiteEntree - s.QuantiteSortie) AS QuantiteRestante
+  FROM Produit p
+  JOIN Stock s ON p.Id_prod = s.Id_prod
+  WHERE (s.QuantiteEntree - s.QuantiteSortie) <= s.Seuil_min;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER retour_after_insert
-AFTER INSERT ON Retour
-FOR EACH ROW
-EXECUTE FUNCTION update_stock_after_return();
-
-
+CREATE OR REPLACE FUNCTION recommander_fournisseur(id_prod INT, en_urgence BOOLEAN)
+RETURNS TABLE(Id_fournsr INT, Nom VARCHAR, CoutLivraison DECIMAL, DelaiLivraison INT) AS $$
+BEGIN
+  IF en_urgence THEN
+    RETURN QUERY
+    SELECT f.Id_fournsr, f.Nom, if.CoutLivraison, if.DelaiLivraison
+    FROM Fournisseur f
+    JOIN InfosFournisseur if ON f.Id_fournsr = if.Id_fournsr
+    WHERE f.Id_fournsr IN (SELECT Id_fournsr FROM Produit WHERE Id_prod = id_prod)
+    ORDER BY if.DelaiLivraison ASC
+    LIMIT 1;
+  ELSE
+    RETURN QUERY
+    SELECT f.Id_fournsr, f.Nom, if.CoutLivraison, if.DelaiLivraison
+    FROM Fournisseur f
+    JOIN InfosFournisseur if ON f.Id_fournsr = if.Id_fournsr
+    WHERE f.Id_fournsr IN (SELECT Id_fournsr FROM Produit WHERE Id_prod = id_prod)
+    ORDER BY if.CoutLivraison ASC
+    LIMIT 1;
+  END IF;
+END;
+$$ LANGUAGE plpgsql;
